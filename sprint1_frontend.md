@@ -5,52 +5,65 @@
 #### **Sprint Goals:**
 
 1. **Set up the code repository on GitHub.**
-2. **Set up the frontend project using Next.js, Tailwind CSS, and JavaScript.**
-3. **Prepare the basic project structure.**
-4. **Set up CI/CD processes for the frontend.**
+2. **Initialize the frontend project using Next.js and integrate Tailwind CSS.**
+3. **Establish the basic project structure.**
+4. **Configure CI/CD processes for frontend deployment.**
 
-#### **Roles and Responsibilities:**
+---
+
+### **Frontend Setup Document**
+
+#### **Sprint 1: Frontend Setup**
+
+##### **Sprint Goals:**
+
+1. **Set up the code repository on GitHub.**
+2. **Initialize the frontend project using Next.js and integrate Tailwind CSS.**
+3. **Establish the basic project structure.**
+4. **Configure CI/CD processes for frontend deployment.**
+
+##### **Roles and Responsibilities:**
 
 - **Front-end Developer:**
-  - Set up Next.js.
+  - Initialize Next.js project.
   - Integrate Tailwind CSS.
-  - Create the basic frontend structure.
+  - Develop the basic frontend structure.
   - Set up CI/CD for frontend deployment.
 
-#### **Technical Requirements and Tools:**
+##### **Technical Requirements and Tools:**
 
 - **Frontend:**
   - Next.js
   - React
   - Tailwind CSS
   - JavaScript (ES6+)
-  
+
 - **Infrastructure:**
   - GitHub
   - Nginx
   - Docker (optional)
   - GitHub Actions (for CI/CD)
-  
+
 - **Communication and Project Management Tools:**
   - Slack
   - Jira/Trello
   - GitHub Projects
 
-#### **Tasks and Steps:**
+##### **Tasks and Steps:**
 
 ### **1. Setting Up the Repository on GitHub**
 
-*Note: Repository setup is handled in the Backend Setup document to avoid duplication. Ensure both frontend and backend are in the same repository under different directories (`frontend/` and `backend/`).*
+*Note: Repository setup is handled in the Backend Setup Document to avoid duplication. Ensure both frontend and backend are in the same repository under separate directories (`frontend/` and `backend/`).*
 
-### **2. Setting Up the Frontend Project**
+### **2. Initializing the Frontend Project**
 
 **Tasks:**
 
 - **Initialize the Next.js project.**
 - **Install and configure Tailwind CSS.**
 - **Create the basic project structure with necessary folders (`pages`, `components`, `styles`).**
-- **Create a basic welcome page.**
-- **Set up CI/CD for frontend deployment.**
+- **Develop a basic welcome page.**
+- **Configure CI/CD for frontend deployment.**
 
 **Steps:**
 
@@ -58,6 +71,7 @@
 
 1. **Install Node.js and npm:**
    ```bash
+   sudo apt update
    sudo apt install nodejs npm
    ```
 
@@ -114,7 +128,7 @@
    ```
    - Navigate to `http://localhost:3000` to verify the welcome message.
 
-### **3. Setting Up CI/CD with GitHub Actions**
+### **3. Configuring CI/CD with GitHub Actions**
 
 **Goals:**
 
@@ -174,7 +188,7 @@
 
 *Note: Ensure that the `SSH_PRIVATE_KEY` secret is already set up in the GitHub repository as described in the Backend Setup.*
 
-### **4. Creating the Basic Project Structure**
+### **4. Establishing the Basic Project Structure**
 
 #### **4.1. Frontend (Next.js with Tailwind CSS)**
 
@@ -203,11 +217,11 @@
 - **Coding:**
   - Follow clean code principles.
   - Write clear and informative comments.
-  
+
 - **Version Control:**
   - Commits should be atomic and contain informative messages.
   - Use Pull Requests for code reviews before merging into `develop` or `main`.
-  
+
 - **Security:**
   - Store secrets and confidential data in environment variables.
   - Never commit passwords or keys to the repository.
@@ -231,7 +245,7 @@
 
 ---
 
-### **7. Sprint Conclusion**
+### **Sprint Conclusion**
 
 **By the End of Sprint 1:**
 
@@ -244,7 +258,7 @@
 **User Capabilities:**
 
 - **Users can** view the basic welcome page at `http://your_domain.com`.
-  
+
 ---
 
 ## **Recommendations for the Team**
@@ -271,6 +285,8 @@
 
 ## **Conclusion**
 
-**Sprint 1** lays the foundation for the successful development of your **EduTrack** application. Properly configured infrastructure, repository, and basic functionality provide a stable base for subsequent sprints. By following these separate specifications for the backend and frontend, the team can effectively start working and gradually build up the application's functionality.
+**Sprint 1** establishes the foundational elements for the successful development of the **EduTrack** application. Properly configured infrastructure, repository, and basic functionality provide a stable base for subsequent sprints. By following these specifications for both the backend and frontend, the team can effectively collaborate and progressively enhance the application's capabilities.
 
 If you need further detailing on specific sprints or assistance with other aspects of the project, please let me know!
+
+---
