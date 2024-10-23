@@ -38,7 +38,7 @@
   - Uvicorn
   - SQLAlchemy (for ORM)
   - PostgreSQL (proposed database)
-  
+
 - **Infrastructure:**
   - GitHub
   - Nginx
@@ -70,6 +70,7 @@
 3. **Adding `.gitignore`:**
    - **For Python:**
      ```gitignore
+     # EduTrack/.gitignore
      # Python
      __pycache__/
      *.py[cod]
@@ -77,6 +78,7 @@
      ```
    - **For Node.js:**
      ```gitignore
+     # EduTrack/.gitignore
      # Node
      node_modules/
      .next/
@@ -85,6 +87,7 @@
 
 4. **Creating `README.md`:**
    ```markdown
+   <!-- EduTrack/README.md -->
    # EduTrack
 
    EduTrack is an application for tracking student performance, lecture attendance, and chat activity with gamification elements.
@@ -152,11 +155,6 @@
 
 ---
 
-### **Conclusion**
-
-By following these steps, the `sprint1` branch will be created and integrated into the CI/CD workflow, ensuring that all work done in this sprint is properly tracked and deployed.
-
-
 ### **2. Setting Up the Server Infrastructure**
 
 **Current Conditions:**
@@ -207,6 +205,7 @@ By following these steps, the `sprint1` branch will be created and integrated in
 
 5. **Create `main.py`:**
    ```python
+   # EduTrack/backend/app/main.py
    from fastapi import FastAPI
 
    app = FastAPI()
@@ -218,6 +217,7 @@ By following these steps, the `sprint1` branch will be created and integrated in
 
 6. **Create `requirements.txt`:**
    ```plaintext
+   # EduTrack/backend/requirements.txt
    fastapi
    uvicorn
    sqlalchemy
@@ -230,11 +230,13 @@ By following these steps, the `sprint1` branch will be created and integrated in
    ```
    - Navigate to `http://localhost:8000` to verify the welcome message.
 
+---
+
 ### **3. Setting Up CI/CD with GitHub Actions**
 
 **Goals:**
 
-- **Automate the deployment process on pushes to `main` or `develop`.**
+- **Automate the deployment process on pushes to `main`, `develop`, or `sprint1`.**
 - **Ensure continuous integration and delivery.**
 
 **Steps:**
@@ -242,53 +244,54 @@ By following these steps, the `sprint1` branch will be created and integrated in
 #### **3.1. Creating GitHub Actions for the Backend**
 
 1. **Create a Workflows Folder:**
-   - In the root of the repository, create a folder named `.github/workflows/sprint1_backend.md`.
+   - In the root of the repository, create a folder named `.github/workflows/`.
 
 2. **Create a Workflow File:**
    - Create a file named `backend-deploy.yml`:
      ```yaml
-    name: Backend CI/CD
+     # EduTrack/.github/workflows/backend-deploy.yml
+     name: Backend CI/CD
 
-    on:
-    push:
-        branches:
-        - main
-        - develop
+     on:
+       push:
+         branches:
+           - main
+           - develop
+           - sprint1
 
-    jobs:
-    build:
+     jobs:
+       build:
+         runs-on: ubuntu-latest
 
-        runs-on: ubuntu-latest
+         steps:
+           - name: Checkout code
+             uses: actions/checkout@v2
 
-        steps:
-        - name: Checkout code
-        uses: actions/checkout@v2
+           - name: Set up Python
+             uses: actions/setup-python@v2
+             with:
+               python-version: '3.9'
 
-        - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-            python-version: '3.9'
+           - name: Install dependencies
+             run: |
+               python -m venv venv
+               source venv/bin/activate
+               pip install -r backend/requirements.txt
 
-        - name: Install dependencies
-        run: |
-            python -m venv venv
-            source venv/bin/activate
-            pip install -r backend/requirements.txt
+           - name: Run Tests
+             run: |
+               source venv/bin/activate
+               # Add commands to run tests
+               echo "Tests not set up"
 
-        - name: Run Tests
-        run: |
-            source venv/bin/activate
-            # Add commands to run tests
-            echo "Tests not set up"
-
-        - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@v2.1.5
-        with:
-            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-            remote-user: your_server_user
-            server-ip: your_server_ip
-            remote-path: /path/to/edutrack/backend
-            local-path: backend/
+           - name: Deploy to Server
+             uses: easingthemes/ssh-deploy@v2.1.5
+             with:
+               ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+               remote-user: your_server_user
+               server-ip: your_server_ip
+               remote-path: /path/to/edutrack/backend
+               local-path: backend/
      ```
 
 #### **3.2. Setting Up Secrets:**
@@ -348,60 +351,11 @@ By following these steps, the `sprint1` branch will be created and integrated in
    @app.get("/")
    def read_root():
        return {"message": "Welcome to EduTrack!"}
-   ```
+     ```
 
 ---
 
-### **5. Documentation and Best Practices**
+### **Conclusion**
 
-**Recommendations:**
-
-- **Coding:**
-  - Follow clean code principles.
-  - Write clear and informative comments.
-  
-- **API Documentation:**
-  - Use FastAPI’s built-in capabilities to generate documentation (Swagger UI).
-  
-- **Version Control:**
-  - Commits should be atomic and contain informative messages.
-  - Use Pull Requests for code reviews before merging into `develop` or `main`.
-  
-- **Security:**
-  - Store secrets and confidential data in environment variables.
-  - Never commit passwords or keys to the repository.
-
----
-
-### **6. Testing and Validation**
-
-**Goals:**
-
-- **Ensure that the basic infrastructure is functioning correctly.**
-- **Verify that the backend can interact with the database and frontend through the configured server.**
-
-**Steps:**
-
-1. **Backend:**
-   - Run FastAPI locally and verify the availability of the `/` endpoint.
-   - Ensure the database is connected and models are created.
-
-2. **CI/CD:**
-   - Perform a test push to the `develop` branch and ensure that GitHub Actions execute correctly.
-   - Verify deployment on the server.
-
----
-
-### **7. Sprint Conclusion**
-
-**By the End of Sprint 1:**
-
-- **GitHub Repository** is set up with a basic structure and branch protection.
-- **Backend (FastAPI)** is configured with a basic endpoint and database connection.
-- **CI/CD Processes** are configured for automatic deployment on pushes to `main` and `develop`.
-- **Server** is configured to proxy requests to the backend through Nginx.
-- **Documentation** is updated with basic project information.
-
-**User Capabilities:**
-
-- **Users can** access the backend API at `http://your_domain.com/api/`, which returns a welcome message.
+- **GitHub Repository:** The repository for EduTrack is correctly set up with the proper branching (`sprint1`).
+- **Backend:** The FastAPI backend is configured to run on `http://localhost:8000` and is integrated into the CI/CD workflow.
