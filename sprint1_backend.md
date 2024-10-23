@@ -100,6 +100,63 @@
    - **Database:** PostgreSQL
    ```
 
+### **Creating the `sprint1` Branch**
+
+**Tasks:**
+
+- **Create a new branch named `sprint1` for the initial sprint work.**
+- **Ensure that the `sprint1` branch is protected and follows the same rules as `main` and `develop`.**
+
+**Steps:**
+
+1. **Creating the `sprint1` Branch:**
+    - Navigate to your local repository and create the branch:
+      ```bash
+      git checkout -b sprint1
+      ```
+
+2. **Pushing the `sprint1` Branch to GitHub:**
+    - Push the new branch to the remote repository:
+      ```bash
+      git push origin sprint1
+      ```
+
+3. **Setting Up Branch Protection Rules:**
+    - Navigate to your GitHub repository.
+    - Go to `Settings` > `Branches` > `Branch protection rules`.
+    - Add a new rule for `sprint1` to prevent direct pushes and require pull requests for merging.
+
+
+### **Updating the CI/CD Workflow for `sprint1` Branch**
+
+**Steps:**
+
+1. **Modify the Workflow File:**
+    - Update `.github/workflows/backend-deploy.yml` to include the `sprint1` branch:
+      ```yaml
+      on:
+         push:
+            branches:
+              - main
+              - develop
+              - sprint1
+      ```
+
+2. **Commit and Push Changes:**
+    - Commit the changes to the workflow file and push to the `sprint1` branch:
+      ```bash
+      git add .github/workflows/backend-deploy.yml
+      git commit -m "Update CI/CD workflow to include sprint1 branch"
+      git push origin sprint1
+      ```
+
+---
+
+### **Conclusion**
+
+By following these steps, the `sprint1` branch will be created and integrated into the CI/CD workflow, ensuring that all work done in this sprint is properly tracked and deployed.
+
+
 ### **2. Setting Up the Server Infrastructure**
 
 **Current Conditions:**
@@ -185,53 +242,53 @@
 #### **3.1. Creating GitHub Actions for the Backend**
 
 1. **Create a Workflows Folder:**
-   - In the root of the repository, create a folder named `.github/workflows`.
+   - In the root of the repository, create a folder named `.github/workflows/sprint1_backend.md`.
 
 2. **Create a Workflow File:**
    - Create a file named `backend-deploy.yml`:
      ```yaml
-     name: Backend CI/CD
+    name: Backend CI/CD
 
-     on:
-       push:
-         branches:
-           - main
-           - develop
+    on:
+    push:
+        branches:
+        - main
+        - develop
 
-     jobs:
-       build:
+    jobs:
+    build:
 
-         runs-on: ubuntu-latest
+        runs-on: ubuntu-latest
 
-         steps:
-         - name: Checkout code
-           uses: actions/checkout@v2
+        steps:
+        - name: Checkout code
+        uses: actions/checkout@v2
 
-         - name: Set up Python
-           uses: actions/setup-python@v2
-           with:
-             python-version: '3.9'
+        - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+            python-version: '3.9'
 
-         - name: Install dependencies
-           run: |
-             python -m venv venv
-             source venv/bin/activate
-             pip install -r backend/requirements.txt
+        - name: Install dependencies
+        run: |
+            python -m venv venv
+            source venv/bin/activate
+            pip install -r backend/requirements.txt
 
-         - name: Run Tests
-           run: |
-             source venv/bin/activate
-             # Add commands to run tests
-             echo "Tests not set up"
+        - name: Run Tests
+        run: |
+            source venv/bin/activate
+            # Add commands to run tests
+            echo "Tests not set up"
 
-         - name: Deploy to Server
-           uses: easingthemes/ssh-deploy@v2.1.5
-           with:
-             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-             remote-user: your_server_user
-             server-ip: your_server_ip
-             remote-path: /path/to/edutrack/backend
-             local-path: backend/
+        - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@v2.1.5
+        with:
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            remote-user: your_server_user
+            server-ip: your_server_ip
+            remote-path: /path/to/edutrack/backend
+            local-path: backend/
      ```
 
 #### **3.2. Setting Up Secrets:**
