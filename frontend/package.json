@@ -12,7 +12,9 @@
   "dependencies": {
     "next": "15.0.1",
     "react": "19.0.0-rc-69d4b800-20241021",
-    "react-dom": "19.0.0-rc-69d4b800-20241021"
+    "react-dom": "19.0.0-rc-69d4b800-20241021",
+    "recharts": "^2.13.3",
+    "tailwind-scrollbar": "^3.1.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.25.9",
